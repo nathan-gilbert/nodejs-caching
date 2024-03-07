@@ -12,7 +12,8 @@ function readData() {
 
 async function routes(fastify, options) {
   fastify.get("/api/user-data", async (request, reply) => {
-    return { hello: "world" };
+    const userData = readData();
+    return { data: userData };
   });
 }
 
