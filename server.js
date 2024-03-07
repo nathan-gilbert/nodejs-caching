@@ -2,23 +2,24 @@ const fastify = require("fastify")({
   logger: true,
 });
 
-const redis_host = process.env.REDIS_TLS_URL || "127.0.0.1";
-const socket =
+const REDIS_HOST = process.env.REDIS_TLS_URL || "127.0.0.1";
+const SOCKET =
   process.env.REDIS_TLS_URL != ""
     ? {
         tls: true,
         rejectUnauthorized: false,
       }
     : { tls: false, rejectUnauthorized: false };
+const PORT = process.env.PORT || 8888;
 
 fastify.register(require("@fastify/redis"), {
-  host: redis_host,
-  socket: socket,
+  host: REDIS_HOST,
+  socket: SOCKET,
 });
 
 fastify.register(require("./routes"));
 
-fastify.listen({ port: 8888 }, function (err, address) {
+fastify.listen({ port: PORT }, function (err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
