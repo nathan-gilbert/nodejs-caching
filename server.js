@@ -14,22 +14,21 @@ function parseRedisUrl(redisUrl) {
   };
 }
 
-const REDIS_HOST = process.env.REDIS_URL
+const HOST = process.env.HOST || "127.0.0.1";
+const PORT = process.env.PORT || 8888;
+const redis_info = process.env.REDIS_URL
   ? parseRedisUrl(process.env.REDIS_URL)
   : "127.0.0.1";
-const PORT = process.env.PORT || 8888;
-
-console.log(parseRedisUrl(process.env.REDIS_URL));
 
 fastify.register(require("@fastify/redis"), {
-  host: REDIS_HOST.host,
-  port: REDIS_HOST.port || 6379,
-  password: REDIS_HOST.password || "",
+  host: redis_info.host,
+  port: redis_info.port || 6379,
+  password: redis_info.password || "",
 });
 
 fastify.register(require("./routes"));
 
-fastify.listen({ port: PORT }, function (err, address) {
+fastify.listen({ host: HOST, port: PORT }, function (err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
