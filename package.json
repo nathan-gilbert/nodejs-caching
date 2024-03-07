@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-caching",
+  "version": "1.0.0",
+  "description": "An example project showing how to use Redis to cache responses for a Fastify app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathan-gilbert/nodejs-caching.git"
+  },
+  "keywords": [
+    "nodejs",
+    "fastify",
+    "redis"
+  ],
+  "author": "Nathan Gilbert",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/nathan-gilbert/nodejs-caching/issues"
+  },
+  "homepage": "https://github.com/nathan-gilbert/nodejs-caching#readme"
+}
