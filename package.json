@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/nathan-gilbert/nodejs-caching#readme",
   "dependencies": {
+    "@fastify/redis": "^6.1.1",
     "fastify": "^4.26.2",
     "fastify-cli": "^6.1.1"
   }
