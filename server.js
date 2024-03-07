@@ -4,7 +4,8 @@ const fastify = require("fastify")({
 
 function parseRedisUrl(redisUrl) {
   const url = new URL(redisUrl);
-  const [username, password] = url.username.split(":");
+  const username = url.username;
+  const password = url.password;
   return {
     host: url.hostname,
     port: url.port,
@@ -17,6 +18,8 @@ const REDIS_HOST = process.env.REDIS_URL
   ? parseRedisUrl(process.env.REDIS_URL)
   : "127.0.0.1";
 const PORT = process.env.PORT || 8888;
+
+console.log(parseRedisUrl(process.env.REDIS_URL));
 
 fastify.register(require("@fastify/redis"), {
   host: REDIS_HOST.host,
