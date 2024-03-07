@@ -2,14 +2,8 @@ const fastify = require("fastify")({
   logger: true,
 });
 
-const REDIS_HOST = process.env.REDIS_TLS_URL || "127.0.0.1";
-const SOCKET =
-  process.env.REDIS_TLS_URL != ""
-    ? {
-        tls: true,
-        rejectUnauthorized: false,
-      }
-    : { tls: false, rejectUnauthorized: false };
+const REDIS_HOST = process.env.REDIS_URL || "127.0.0.1";
+const SOCKET = { tls: false, rejectUnauthorized: false };
 const PORT = process.env.PORT || 8888;
 
 fastify.register(require("@fastify/redis"), {
