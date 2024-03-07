@@ -14,8 +14,8 @@ function parseRedisUrl(redisUrl) {
   };
 }
 
-const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || 8888;
+const HOST = process.env.PORT ? "0.0.0.0" : "127.0.0.1";
 const redis_info = process.env.REDIS_URL
   ? parseRedisUrl(process.env.REDIS_URL)
   : "127.0.0.1";
