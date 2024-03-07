@@ -2,11 +2,27 @@ const fastify = require("fastify")({
   logger: true,
 });
 
-const REDIS_HOST = process.env.REDIS_URL || "127.0.0.1";
-//const SOCKET = { tls: false, rejectUnauthorized: false };
+function parseRedisUrl(redisUrl) {
+  const url = new URL(redisUrl);
+  const [username, password] = url.username.split(":");
+  return {
+    host: url.hostname,
+    port: url.port,
+    username,
+    password,
+  };
+}
+
+const REDIS_HOST = process.env.REDIS_URL
+  ? parseRedisUrl(process.env.REDIS_URL)
+  : "127.0.0.1";
 const PORT = process.env.PORT || 8888;
 
-fastify.register(require("@fastify/redis"), { host: REDIS_HOST });
+fastify.register(require("@fastify/redis"), {
+  host: REDIS_HOST.host,
+  port: REDIS_HOST.port || 6379,
+  password: REDIS_HOST.password || "",
+});
 
 fastify.register(require("./routes"));
 
