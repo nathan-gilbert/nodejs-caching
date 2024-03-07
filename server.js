@@ -3,13 +3,10 @@ const fastify = require("fastify")({
 });
 
 const REDIS_HOST = process.env.REDIS_URL || "127.0.0.1";
-const SOCKET = { tls: false, rejectUnauthorized: false };
+//const SOCKET = { tls: false, rejectUnauthorized: false };
 const PORT = process.env.PORT || 8888;
 
-fastify.register(require("@fastify/redis"), {
-  host: REDIS_HOST,
-  socket: SOCKET,
-});
+fastify.register(require("@fastify/redis"), { host: REDIS_HOST });
 
 fastify.register(require("./routes"));
 
