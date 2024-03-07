@@ -16,6 +16,10 @@ function sleep(ms) {
 }
 
 async function routes(fastify, options) {
+  fastify.get("/api/health", async (_, reply) => {
+    return reply.send({ status: "ok" });
+  });
+
   fastify.get("/api/user-data", async (_, reply) => {
     const userData = readData();
     return reply.send({ data: userData });
