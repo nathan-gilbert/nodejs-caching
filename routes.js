@@ -28,6 +28,7 @@ async function routes(fastify, options) {
   fastify.get("/api/cached-user-data", async (_, reply) => {
     const { redis } = fastify;
 
+    // check if data is in cache
     const data = await redis.get("user-data", (err, val) => {
       if (val) {
         return { data: val };
@@ -39,8 +40,11 @@ async function routes(fastify, options) {
       return reply.send(data);
     }
 
+    // simulate a long running task
+    await sleep(5000);
+
     const userData = readData();
-    await sleep(10000);
+    // add data to the cache
     redis.set("user-data", userData);
     return reply.send({ data: userData });
   });
